@@ -3,6 +3,9 @@
   <head>
     <link rel="stylesheet" href="test.css" />
   </head>
+  <div class="buttonBox">
+    <button id="nightmode" onclick="toggleNightmode()">TO NIGHTMODE</button>
+  </div>
 
   <column-set gutter="0rem"
     ><column-unit slot="0"></column-unit><column-unit slot="1"></column-unit
@@ -36,10 +39,6 @@
           <option value="liga">Standard Ligatures</option>
           <!--    Add more OpenType features as needed    -->
         </select>
-      </div>
-
-      <div>
-        <button onclick="toggleNightmode()">TO NIGHTMODE</button>
       </div>
 
       <div class="control-group">
@@ -92,15 +91,7 @@ My name is Frank Reich</textarea
       </div>
 
       <div class="control-group">
-        <label
-          for="openTypeFeatures"
-          isNight
-          ?
-          style="color: white"
-          :
-          style="color: black"
-          >OpenType Features:</label
-        >
+        <label for="openTypeFeatures">OpenType Features:</label>
         <select id="openTypeFeatures">
           <option selected="" value="none">None</option>
           <option value="swsh">Swash</option>
@@ -170,11 +161,19 @@ My name is Frank Reich</textarea
       allLabels.forEach((label) => {
         isNight ? (label.style.color = "white") : (label.style.color = "black");
       });
+
+      allSizeSliders.forEach((slider) => {
+        isNight
+          ? (slider.style.background = "white")
+          : (slider.style.background = "black");
+      });
+
       textAreas.forEach((textArea) => {
         isNight
           ? (textArea.style.color = "white")
           : (textArea.style.color = "black");
       });
+
       if (isNight) {
         document.body.style.backgroundColor = "black";
       } else {
@@ -182,7 +181,6 @@ My name is Frank Reich</textarea
       }
 
       isNight = !isNight;
-      console.log(isNight);
     }
   </script>
 
