@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="test.css" />
+  </head>
+
+  <column-set gutter="0rem"
+    ><column-unit slot="0"></column-unit><column-unit slot="1"></column-unit
+    ><column-unit slot="2"></column-unit><column-unit slot="3"></column-unit
+    ><column-unit slot="4"></column-unit><column-unit slot="5"></column-unit
+    ><column-unit slot="6"></column-unit><column-unit slot="7"></column-unit
+    ><column-unit slot="8"></column-unit><column-unit slot="9"></column-unit
+    ><column-unit slot="10"></column-unit><column-unit slot="11"></column-unit
+  ></column-set>
+
+  <div class="container">
+    <div class="controls">
+      <br />&nbsp;&nbsp;
+      <div class="control-group">
+        <label for="weightSelect">Font Weight:</label>
+        <select id="weightSelect">
+          <option value="300">Light</option>
+          <option value="400">Regular</option>
+          <option selected="" value="500">Medium</option>
+          <option value="600">Bold</option>
+          <option value="800">Heavy</option>
+        </select>
+      </div>
+
+      <!---    -->
+      <div class="control-group">
+        <label for="openTypeFeatures">OpenType Features:</label>
+        <select id="openTypeFeatures">
+          <option selected="" value="none">None</option>
+          <option value="swsh">Swash</option>
+          <option value="liga">Standard Ligatures</option>
+          <!--    Add more OpenType features as needed    -->
+        </select>
+      </div>
+
+      <div>
+        <button onclick="toggleNightmode()">TO NIGHTMODE</button>
+      </div>
+
+      <div class="control-group">
+        <label class="fontChange" for="sizeSlider">Text Size:</label>
+        <input
+          class="slider sliderCol"
+          id="sizeSlider"
+          max="300"
+          min="20"
+          type="range"
+          value="140"
+        />
+      </div>
+    </div>
+    &nbsp;<textarea
+      id="textArea"
+      spellcheck="false"
+      style="
+        font-size: 140px;
+        font-weight: 500;
+        height: 11rem;
+        text-align: left;
+      "
+    >
+My name is Frank Reich</textarea
+    >
+  </div>
+
+  <column-set gutter="0rem"
+    ><column-unit slot="0"></column-unit><column-unit slot="1"></column-unit
+    ><column-unit slot="2"></column-unit><column-unit slot="3"></column-unit
+    ><column-unit slot="4"></column-unit><column-unit slot="5"></column-unit
+    ><column-unit slot="6"></column-unit><column-unit slot="7"></column-unit
+    ><column-unit slot="8"></column-unit><column-unit slot="9"></column-unit
+    ><column-unit slot="10"></column-unit><column-unit slot="11"></column-unit
+  ></column-set>
+
+  <div class="container">
+    <div class="controls">
+      <br />&nbsp;&nbsp;
+      <div class="control-group">
+        <label class="fontChange" for="weightSelect">Font Weight:</label>
+        <select id="weightSelect">
+          <option value="300">Light</option>
+          <option value="400">Regular</option>
+          <option selected="" value="500">Medium</option>
+          <option value="600">Bold</option>
+          <option value="800">Heavy</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label
+          for="openTypeFeatures"
+          isNight
+          ?
+          style="color: white"
+          :
+          style="color: black"
+          >OpenType Features:</label
+        >
+        <select id="openTypeFeatures">
+          <option selected="" value="none">None</option>
+          <option value="swsh">Swash</option>
+          <option value="liga">Standard Ligatures</option>
+          <!--    Add more OpenType features as needed    -->
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="sizeSlider">Text Size:</label>
+        <input
+          class="slider sliderCol"
+          id="sizeSlider"
+          max="300"
+          min="20"
+          type="range"
+          value="140"
+        />
+      </div>
+    </div>
+    &nbsp;<textarea
+      id="textArea"
+      spellcheck="false"
+      style="
+        font-weight: 500;
+        height: 288px;
+        text-align: left;
+        font-size: 140px;
+      "
+    >
+My name is Frank Reich</textarea
+    >
+  </div>
+
+  <script>
+    const sizeSliders = document.querySelectorAll("#sizeSlider");
+
+    sizeSliders.forEach((slider) => {
+      slider.addEventListener("input", updateText);
+    });
+
+    const weightSelectors = document.querySelectorAll("#weightSelect");
+    const textAreas = document.querySelectorAll("#textArea");
+    const allSizeSliders = document.querySelectorAll(".sliderCol");
+    const allLabels = document.querySelectorAll("label");
+    let isNight = true;
+
+    function updateText() {
+      for (let i = 0; i < allSizeSliders.length; i++) {
+        allSizeSliders[i].addEventListener("input", (event) => {
+          let slider = allSizeSliders[i];
+          let textArea = textAreas[i];
+
+          let weight = weightSelectors[i].value;
+          let size = slider.value;
+
+          textArea.style.fontSize = size + "px";
+          textArea.style.fontWeight = weight;
+          //textArea.style.height = "11rem";
+          textArea.style.height = "auto";
+          textArea.style.height = textArea.scrollHeight + "px";
+        });
+      }
+    }
+
+    function toggleNightmode() {
+      allLabels.forEach((label) => {
+        isNight ? (label.style.color = "white") : (label.style.color = "black");
+      });
+      textAreas.forEach((textArea) => {
+        isNight
+          ? (textArea.style.color = "white")
+          : (textArea.style.color = "black");
+      });
+      if (isNight) {
+        document.body.style.backgroundColor = "black";
+      } else {
+        document.body.style.backgroundColor = "white";
+      }
+
+      isNight = !isNight;
+      console.log(isNight);
+    }
+  </script>
+
+  <!-- Typetester Ende -->
+</html>
